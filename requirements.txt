@@ -1,4 +1,4 @@
-﻿anyio==4.9.0
+anyio==4.9.0
 arabic-reshaper==3.0.0
 argon2-cffi==23.1.0
 argon2-cffi-bindings==21.2.0
@@ -115,7 +115,7 @@ python-bidi==0.6.3
 python-dateutil==2.8.2
 python-json-logger==3.3.0
 pytz==2024.1
-pywin32
+pywin32==306  # Fixed from 'pywin32' to 'pywin32==306'
 pywinpty==2.0.15
 PyYAML==6.0.2
 pyzmq==26.3.0
