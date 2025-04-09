@@ -1,1 +1,1 @@
-web: gunicorn renewable-energy.wsgi --bind 0.0.0.0:$PORT
+gunicorn self.wsgi --bind 0.0.0.0:$PORT
