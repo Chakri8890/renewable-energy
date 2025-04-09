@@ -1,0 +1,551 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Production Prediction</title>
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: url("{% static 'images/02.avif' %}") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 420px;
+            max-height: 90vh; /* Limits container height */
+            overflow-y: auto; /* Enables vertical scrolling */
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: 500;
+            margin-top: 8px;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Energy Production Prediction</h2>
+        <form action="{% url 'output' %}" method="post">
+            {% csrf_token %}
+
+            <label>Wind Speed:</label>
+            <input type="number" step="0.01" name="WindSpeed" required>
+
+            <label>Sunshine:</label>
+            <input type="number" step="0.01" name="Sunshine" required>
+
+            <label>Air Pressure:</label>
+            <input type="number" step="0.01" name="AirPressure" required>
+
+            <label>Radiation:</label>
+            <input type="number" step="0.01" name="Radiation" required>
+
+            <label>Air Temperature:</label>
+            <input type="number" step="0.01" name="AirTemperature" required>
+
+            <label>Relative Air Humidity:</label>
+            <input type="number" step="0.01" name="RelativeAirHumidity" required>
+
+            <label>Hour:</label>
+            <input type="number" name="Hour" min="0" max="23" required>
+
+            <label>Day of Week:</label>
+            <input type="number" name="DayOfWeek" min="0" max="6" required>
+
+            <label>Month:</label>
+            <input type="number" name="Month" min="1" max="12" required>
+
+            <label>Day of Year:</label>
+            <input type="number" name="DayOfYear" min="1" max="365" required>
+
+            <label>Select Model:</label>
+            <select name="model">
+                <option value="XGBoost">XGBoost</option>
+                <option value="LGBM">LightGBM</option>
+                <option value="ANN">Artificial Neural Network (ANN)</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html> -->
+<!-- {% load static %}  -->
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
+<!-- <head> -->
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <title>Energy Production Prediction</title> -->
+    <!-- <style> -->
+        <!-- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); -->
+<!--  -->
+        <!-- * { -->
+            <!-- margin: 0; -->
+            <!-- padding: 0; -->
+            <!-- box-sizing: border-box; -->
+            <!-- font-family: 'Poppins', sans-serif; -->
+        <!-- } -->
+<!--  -->
+        <!-- body { -->
+            <!-- background: url("{% static 'images/02.avif' %}") no-repeat center center/cover; -->
+            <!-- display: flex; -->
+            <!-- justify-content: center; -->
+            <!-- align-items: center; -->
+            <!-- height: 100vh; -->
+        <!-- } -->
+<!--  -->
+        <!-- .container { -->
+            <!-- background: rgba(255, 255, 255, 0.9); -->
+            <!-- padding: 25px; -->
+            <!-- border-radius: 12px; -->
+            <!-- box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); -->
+            <!-- width: 420px; -->
+            <!-- max-height: 90vh; -->
+            <!-- overflow-y: auto; -->
+            <!-- text-align: center; -->
+        <!-- } -->
+<!--  -->
+        <!-- h2 { -->
+            <!-- color: #333; -->
+            <!-- font-weight: 600; -->
+            <!-- margin-bottom: 15px; -->
+        <!-- } -->
+<!--  -->
+        <!-- label { -->
+            <!-- display: block; -->
+            <!-- text-align: left; -->
+            <!-- font-weight: 500; -->
+            <!-- margin-top: 8px; -->
+            <!-- color: #444; -->
+        <!-- } -->
+<!--  -->
+        <!-- input, select { -->
+            <!-- width: 100%; -->
+            <!-- padding: 10px; -->
+            <!-- margin: 6px 0; -->
+            <!-- border: 1px solid #bbb; -->
+            <!-- border-radius: 6px; -->
+            <!-- font-size: 14px; -->
+        <!-- } -->
+<!--  -->
+        <!-- button { -->
+            <!-- background-color: #28a745; -->
+            <!-- color: white; -->
+            <!-- border: none; -->
+            <!-- padding: 12px; -->
+            <!-- cursor: pointer; -->
+            <!-- width: 100%; -->
+            <!-- font-size: 16px; -->
+            <!-- font-weight: 500; -->
+            <!-- border-radius: 6px; -->
+            <!-- transition: 0.3s; -->
+        <!-- } -->
+<!--  -->
+        <!-- button:hover { -->
+            <!-- background-color: #218838; -->
+            <!-- transform: scale(1.05); -->
+        <!-- } -->
+    <!-- </style> -->
+<!-- </head> -->
+<!-- <body> -->
+    <!-- <div class="container"> -->
+        <!-- <h2>Energy Production Prediction</h2> -->
+        <!-- <form name="weatherForm" action="{% url 'output' %}" method="post"> -->
+            <!-- {% csrf_token %} -->
+<!--  -->
+            <!-- <label>Wind Speed:</label> -->
+            <!-- <input type="number" step="0.01" name="WindSpeed" required> -->
+<!--  -->
+            <!-- <label>Sunshine:</label> -->
+            <!-- <input type="number" step="0.01" name="Sunshine" required> -->
+<!--  -->
+            <!-- <label>Air Pressure:</label> -->
+            <!-- <input type="number" step="0.01" name="AirPressure" required> -->
+<!--  -->
+            <!-- <label>Radiation:</label> -->
+            <!-- <input type="number" step="0.01" name="Radiation" required> -->
+<!--  -->
+            <!-- <label>Air Temperature:</label> -->
+            <!-- <input type="number" step="0.01" name="AirTemperature" required> -->
+<!--  -->
+            <!-- <label>Relative Air Humidity:</label> -->
+            <!-- <input type="number" step="0.01" name="RelativeAirHumidity" required> -->
+<!--  -->
+            <!-- <label>Hour:</label> -->
+            <!-- <input type="number" name="Hour" min="0" max="23" required> -->
+<!--  -->
+            <!-- <label>Day of Week:</label> -->
+            <!-- <input type="number" name="DayOfWeek" min="0" max="6" required> -->
+<!--  -->
+            <!-- <label>Month:</label> -->
+            <!-- <input type="number" name="Month" min="1" max="12" required> -->
+<!--  -->
+            <!-- <label>Day of Year:</label> -->
+            <!-- <input type="number" name="DayOfYear" min="1" max="366" required> -->
+<!--  -->
+            <!-- <label>Select Model:</label> -->
+            <!-- <select name="model"> -->
+                <!-- <option value="XGBoost">XGBoost</option> -->
+                <!-- <option value="LGBM">LightGBM</option> -->
+                <!-- <option value="ANN">Artificial Neural Network (ANN)</option> -->
+            <!-- </select> -->
+<!--  -->
+            <!-- <button type="submit">Predict</button> -->
+        <!-- </form> -->
+    <!-- </div> -->
+<!--  -->
+    <!-- <script> -->
+        <!-- async function fillWeatherData() { -->
+            <!-- const apiKey = "b28be21e9e3f3e93e1fd8ccf057aa452"; // OpenWeatherMap API key -->
+            <!-- const city = "Bangalore"; -->
+            <!-- const url = "https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric"; -->
+<!--  -->
+            <!-- try { -->
+                <!-- const res = await fetch(url); -->
+                <!-- const data = await res.json(); -->
+<!--  -->
+                <!-- const form = document.forms["weatherForm"]; -->
+<!--  -->
+                <!-- form["WindSpeed"].value = data.wind.speed; -->
+                <!-- form["AirPressure"].value = data.main.pressure; -->
+                <!-- form["AirTemperature"].value = data.main.temp; -->
+                <!-- form["RelativeAirHumidity"].value = data.main.humidity; -->
+<!--  -->
+                <!-- // Default values for Sunshine & Radiation -->
+                <!-- form["Sunshine"].value = 5.5; -->
+                <!-- form["Radiation"].value = 200; -->
+<!--  -->
+                <!-- const now = new Date(); -->
+                <!-- form["Hour"].value = now.getHours(); -->
+                <!-- form["DayOfWeek"].value = now.getDay(); -->
+                <!-- form["Month"].value = now.getMonth() + 1; -->
+<!--  -->
+                <!-- const start = new Date(now.getFullYear(), 0, 0); -->
+                <!-- const diff = now - start; -->
+                <!-- const oneDay = 1000 * 60 * 60 * 24; -->
+                <!-- form["DayOfYear"].value = Math.floor(diff / oneDay); -->
+<!--  -->
+            <!-- } catch (error) { -->
+                <!-- alert("Unable to fetch weather data."); -->
+                <!-- console.error(error); -->
+            <!-- } -->
+        <!-- } -->
+<!--  -->
+        <!-- window.onload = fillWeatherData; -->
+    <!-- </script> -->
+<!-- </body> -->
+<!-- </html> -->
+<!--  -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Production Prediction</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: url("{% static 'images/02.avif' %}") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 420px;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: 500;
+            margin-top: 8px;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Energy Production Prediction</h2>
+        <form name="weatherForm" action="{% url 'output' %}" method="post">
+            {% csrf_token %}
+
+            <label>Wind Speed:</label>
+            <input type="number" step="0.01" name="WindSpeed" required>
+
+            <label>Sunshine:</label>
+            <input type="number" step="0.01" name="Sunshine" required>
+
+            <label>Air Pressure:</label>
+            <input type="number" step="0.01" name="AirPressure" required>
+
+            <label>Radiation:</label>
+            <input type="number" step="0.01" name="Radiation" required>
+
+            <label>Air Temperature:</label>
+            <input type="number" step="0.01" name="AirTemperature" required>
+
+            <label>Relative Air Humidity:</label>
+            <input type="number" step="0.01" name="RelativeAirHumidity" required>
+
+            <label>Hour:</label>
+            <input type="number" name="Hour" min="0" max="23" required>
+
+            <label>Day of Week:</label>
+            <input type="number" name="DayOfWeek" min="0" max="6" required>
+
+            <label>Month:</label>
+            <input type="number" name="Month" min="1" max="12" required>
+
+            <label>Day of Year:</label>
+            <input type="number" name="DayOfYear" min="1" max="366" required>
+
+            <label>Select Model:</label>
+            <select name="model">
+                <option value="XGBoost">XGBoost</option>
+                <option value="LGBM">LightGBM</option>
+                <option value="ANN">Artificial Neural Network (ANN)</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+
+    <script>
+        async function fillWeatherData() {
+            const apiKey = "b28be21e9e3f3e93e1fd8ccf057aa452"; // Replace with your OpenWeatherMap API key
+            const city = '{{city}}';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+
+                const form = document.forms["weatherForm"];
+
+                form["WindSpeed"].value = data.wind.speed;
+                form["AirPressure"].value = data.main.pressure;
+                form["AirTemperature"].value = data.main.temp;
+                form["RelativeAirHumidity"].value = data.main.humidity;
+
+                // Default values for Sunshine & Radiation
+                form["Sunshine"].value = 5.5;
+                form["Radiation"].value = 200;
+
+                const now = new Date();
+                form["Hour"].value = now.getHours();
+                form["DayOfWeek"].value = now.getDay();
+                form["Month"].value = now.getMonth() + 1;
+
+                const start = new Date(now.getFullYear(), 0, 0);
+                const diff = now - start;
+                const oneDay = 1000 * 60 * 60 * 24;
+                form["DayOfYear"].value = Math.floor(diff / oneDay);
+
+            } catch (error) {
+                alert("Unable to fetch weather data.");
+                console.error(error);
+            }
+        }
+
+        window.onload = fillWeatherData;
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Energy Production Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1509395176047-4a66953fd231') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+    <script>
+        async function fetchWeather() {
+            const location = document.getElementById("location").value;
+            const response = await fetch(`/get_weather_data?location=${location}`);
+            const data = await response.json();
+            if (data) {
+                document.getElementById("wind_speed").value = data.wind_speed;
+                document.getElementById("sunshine").value = data.sunshine;
+                document.getElementById("air_pressure").value = data.air_pressure;
+                document.getElementById("radiation").value = data.radiation;
+                document.getElementById("air_temperature").value = data.air_temperature;
+                document.getElementById("humidity").value = data.humidity;
+                document.getElementById("hour").value = data.hour;
+                document.getElementById("day_of_week").value = data.day_of_week;
+                document.getElementById("month").value = data.month;
+                document.getElementById("day_of_year").value = data.day_of_year;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Energy Production Prediction</h2>
+        <div class="form-group">
+            <input type="text" id="location" placeholder="Enter Location (e.g., Tirupati)" required>
+        </div>
+        <button onclick="fetchWeather()">Fetch Weather</button>
+
+        <div class="form-group"><input type="text" id="wind_speed" placeholder="Wind Speed:"></div>
+        <div class="form-group"><input type="text" id="sunshine" placeholder="Sunshine:"></div>
+        <div class="form-group"><input type="text" id="air_pressure" placeholder="Air Pressure:"></div>
+        <div class="form-group"><input type="text" id="radiation" placeholder="Radiation:"></div>
+        <div class="form-group"><input type="text" id="air_temperature" placeholder="Air Temperature:"></div>
+        <div class="form-group"><input type="text" id="humidity" placeholder="Relative Air Humidity:"></div>
+        <div class="form-group"><input type="text" id="hour" placeholder="Hour:"></div>
+        <div class="form-group"><input type="text" id="day_of_week" placeholder="Day of Week:"></div>
+        <div class="form-group"><input type="text" id="month" placeholder="Month:"></div>
+        <div class="form-group"><input type="text" id="day_of_year" placeholder="Day of Year:"></div>
+    </div>
+</body>
+</html> -->
