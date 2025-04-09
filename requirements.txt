@@ -115,7 +115,6 @@ python-bidi==0.6.3
 python-dateutil==2.8.2
 python-json-logger==3.3.0
 pytz==2024.1
-pywin32==306; sys_platform == "win32"  # Conditional for Windows only
 pywinpty==2.0.15
 PyYAML==6.0.2
 pyzmq==26.3.0
